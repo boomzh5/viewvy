@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>บัณฑิตวีว 💖</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --pink-1: #ffe6f0;
+    --pink-2: #fff0f6;
+    --accent: #d63384;
+    --btn-grad1: #ff5fa2;
+    --btn-grad2: #ff84b7;
+  }
+
+  *{box-sizing: border-box;}
+  body{
+    margin:0;
+    font-family: 'Prompt', sans-serif;
+    background: linear-gradient(180deg, #fff7fb 0%, var(--pink-1) 100%);
+    color: var(--accent);
+    -webkit-font-smoothing:antialiased;
+    text-align:center;
+    padding-bottom:60px;
+    overflow-x:hidden;
+  }
+
+  .container{
+    max-width:920px;
+    margin: 24px auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero{
+    position: relative;
+    padding: 28px 16px;
+    margin-top: 12px;
+  }
+
+  /* ขยายขนาดรูป */
+  .profile-wrap{
+    display:inline-block;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    padding:8px;
+    background: linear-gradient(135deg,#ffd6e8,#ffcce0);
+    box-shadow: 0 8px 20px rgba(214,51,132,0.12);
+    margin-bottom:12px;
+  }
+  .profile-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    display:block;
+    border:6px solid white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  h1{ margin:8px 0 4px; font-size:1.8rem; color:var(--accent);}
+  p.lead{ margin:6px 0; font-size:1rem; color:#b33b76; }
+
+  .section{
+    background-color: var(--pink-2);
+    border-radius:20px;
+    width:100%;
+    margin: 18px auto;
+    padding:18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    text-align:left;
+  }
+  .section h2, .section h3{ color:var(--accent); margin:6px 0 10px;}
+  .section p{ color:#9b2b63; line-height:1.5; margin:4px 0 10px; }
+
+  /* countdown */
+  .countdown{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:10px;
+  }
+  .count-item{
+    background:white;
+    border-radius:10px;
+    padding:10px 16px;
+    font-size:16px;
+    font-weight:700;
+    color:var(--accent);
+    min-width:72px;
+    box-shadow: 0 6px 18px rgba(214,51,132,0.06);
+  }
+  .count-item small{ display:block; font-weight:600; font-size:12px; color:#b33b76; margin-top:6px;}
+
+  /* RSVP */
+  .rsvp-section{ background:transparent; padding:30px 0 10px; }
+
+  form{
+    background: white;
+    border-radius:20px;
+    padding:22px;
+    max-width:520px;
+    margin: 0 auto;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+    text-align:left;
+  }
+  label{ display:block; margin:10px 0 6px; color:var(--accent); font-weight:600; }
+  input, textarea, select{
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #ffd6ea;
+    background:#fff6fa;
+    color:var(--accent);
+    font-size:15px;
+    margin-bottom:12px;
+  }
+  button{
+    display:inline-block;
+    background: linear-gradient(90deg,var(--btn-grad1),var(--btn-grad2));
+    color:white;
+    border:none;
+    border-radius:30px;
+    padding:12px 24px;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow: 0 8px 18px rgba(255,92,160,0.18);
+    transition: transform .18s ease;
+  }
+  button:hover{ transform: translateY(-3px); }
+
+  footer.form-foot{ font-size:13px; color:#b03a75; margin-top:10px; text-align:center; }
+
+  /* map responsive */
+  .map-container{
+    margin-top:14px;
+    display:flex;
+    justify-content:center;
+  }
+  .map-wrap{
+    width:100%;
+    max-width:760px;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+    border:6px solid rgba(255,224,236,0.6);
+  }
+  .map-wrap iframe{ width:100%; height:420px; border:0; display:block; }
+
+  /* floating icons ทั้งหน้า */
+  .floating-icons{
+    pointer-events:none;
+    position:fixed;
+    left:0; right:0;
+    top:0; bottom:0;
+    overflow:visible;
+    z-index:1;
+  }
+  .floating-icons span{
+    position:absolute;
+    font-size:24px;
+    opacity:0.9;
+    transform-origin:center center;
+  }
+
+  @keyframes floatUp {
+    0%{ transform: translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:1; }
+    50%{ transform: translateY(-200px) rotate(10deg); opacity:0.95; }
+    100%{ transform: translateY(-400px) rotate(-10deg); opacity:0; }
+  }
+
+  .fi-1 { left:5%; top:85%; animation: floatUp 7s linear infinite; font-size:28px; }
+  .fi-2 { left:20%; top:90%; animation: floatUp 8s linear 1.2s infinite; font-size:22px; }
+  .fi-3 { left:40%; top:88%; animation: floatUp 6.4s linear 0.4s infinite; font-size:26px; }
+  .fi-4 { left:60%; top:92%; animation: floatUp 9s linear 0.8s infinite; font-size:24px; }
+  .fi-5 { left:80%; top:86%; animation: floatUp 7.5s linear 1.6s infinite; font-size:30px; }
+  .fi-6 { left:10%; top:75%; animation: floatUp 6.8s linear 2.0s infinite; font-size:26px; }
+  .fi-7 { left:70%; top:80%; animation: floatUp 8.4s linear 1.8s infinite; font-size:28px; }
+
+  @media (max-width:640px){
+    .profile-wrap{ width:150px; height:150px; }
+    .map-wrap iframe{ height:320px; }
+    .section{ padding:14px; border-radius:16px; }
+  }
+
+  .badge{
+    display:inline-block;
+    background: linear-gradient(90deg,#fff 0%, rgba(255,255,255,0.6)100%);
+    color:#9b2b63;
+    padding:6px 12px;
+    border-radius:999px;
+    font-weight:700;
+    box-shadow: 0 6px 18px rgba(214,51,132,0.06);
+    margin:8px 0;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- floating icons ทั่วทั้งหน้า -->
+  <div class="floating-icons" aria-hidden="true">
+    <span class="fi-1">🎓</span>
+    <span class="fi-2">💌</span>
+    <span class="fi-3">💐</span>
+    <span class="fi-4">🎉</span>
+    <span class="fi-5">📸</span>
+    <span class="fi-6">💖</span>
+    <span class="fi-7">🌟</span>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <div class="profile-wrap">
+        <img src="view photo.jpg" alt="บัณฑิต พียดา อินทร์ธรรม (วิว)"/>
+      </div>
+
+      <h1>นางสาวพิยดา อินทร์ธรรม (วิว)</h1>
+      <p class="lead">📅 12 พฤศจิกายน 2567 — ขอเรียนเชิญทุกคนมาร่วมแสดงความยินดี 💐</p>
+      <p style="font-style:italic; color:#9a2b66;">You're warmly invited to celebrate my graduation!</p>
+    </div>
+
+    <div class="section">
+      <h3>🎓 จบการศึกษาปริญญาตรีเกียรตินิยมอันดับ 1 เหรียญทอง 🏅</h3>
+      <p>สาขาเทคโนโลยีการโทรทัศน์และวิทยุรายการเสียง<br>
+      คณะเทคโนโลยีสื่อสารมวลชน<br>
+      มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</p>
+    </div>
+
+    <div class="section">
+      <h2>📸 เรียนเชิญทุกคนมาถ่ายรูปกับบัณฑิต 🎓💖</h2>
+      <h3>📋 กำหนดการ</h3>
+      <p>📍 11 พ.ย. (อังคาร) 11:00–12:00 / 16:00 เป็นต้นไป (ซ้อมใหญ่)<br>
+      📍 12 พ.ย. (พุธ) 15:00–18:30 (วันจริง) / บ่ายถ่ายภาพ (แนบให้นัดวัน)</p>
+
+      <h3>✨ Countdown to the Big Day ✨</h3>
+      <div class="countdown" id="countdown">
+        <div class="count-item"><span id="days">00</span><small>วัน</small></div>
+        <div class="count-item"><span id="hours">00</span><small>ชั่วโมง</small></div>
+        <div class="count-item"><span id="mins">00</span><small>นาที</small></div>
+        <div class="count-item"><span id="secs">00</span><small>วินาที</small></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📍 สถานที่</h2>
+      <p>ตึกคณะเทคโนโลยีสื่อสารมวลชน มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (RMUTT)</p>
+      <p>📞 080-555-0761 / dm ig ka!</p>
+      <p>มาร่วมเก็บความทรงจำกับบัณฑิตกันนะคะ 💕</p>
+
+      <div class="map-container">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3870.6384309557643!2d100.7243258!3d14.0394339!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d78a3f5db00d5%3A0xf2b37be56f03402b!2z4LiE4LiT4Liw4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Liq4Li34LmI4Lit4Liq4Liy4Lij4Lih4Lin4Lil4LiK4LiZIOC4oeC4q-C4suC4p-C4tOC4l-C4ouC4suC4peC4seC4ouC5gOC4l-C4hOC5guC4meC5guC4peC4ouC4teC4o-C4suC4iuC4oeC4h-C4hOC4peC4mOC4seC4jeC4muC4uOC4o-C4tQ!5e0!3m2!1sth!2sth!4v1761791769167!5m2!1sth!2sth"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top:10px;">
+        <a class="badge" href="https://maps.app.goo.gl/hScNy3V28mBbRsnY6">📘 แผนที่งาน</a>
+      </p>
+    </div>
+
+    <div class="rsvp-section">
+      <h2 style="color:var(--accent); margin-bottom:6px;">ฝากคำอวยพร / RSVP 💌</h2>
+      <p style="text-align:center; margin-top:10px;">
+        <a class="badge" href="https://docs.google.com/forms/d/e/1FAIpQLSc0mg7SzZn-IIE3MaVCYa8c9hd9lTKAnr_znMqJXUx60-CHgw/formResponse">ลิ้งคำอวยพร💌</a>
+      </p>
+    
+  </div>
+
+<script>
+(function(){
+  const targetDate = new Date('2025-11-12T15:15:00');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = Math.max(0, targetDate - now);
+    const days = Math.floor(diff / (1000*60*60*24));
+    diff -= days * (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));
+    diff -= hours * (1000*60*60);
+    const mins = Math.floor(diff / (1000*60));
+    diff -= mins * (1000*60);
+    const secs = Math.floor(diff / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2,'0');
+    document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+
+</script>
+
+</body>
+</html>
